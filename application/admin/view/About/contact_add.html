@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:15 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 基本表单</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/static/H+/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/H+/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/H+/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/H+/css/animate.min.css" rel="stylesheet">
+    <link href="/static/H+/css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>联系我们修改</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="" class="form-horizontal">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">校区</label>
+
+                            <div class="col-sm-10">
+                                <select class="form-control m-b two_name">
+                                    {volist name="twonav" id="twonav"}
+                                    <option value="{$twonav.two_id}">{$twonav.two_title}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">校区地址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control address">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">咨询电话</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control tel">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">咨询微信</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control wechat">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系QQ</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control qq">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control url">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">状态</label>
+
+                            <div class="radio i-checks" >
+                                <label style="margin-left: 1%">
+                                    <input type="radio" class="status" name="status" value="0" checked> <i></i> 显示</label>
+                                <label style="margin-left: 1%">
+                                    <input type="radio" class="status" name="status" value="1" > <i></i> 不显示</label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-w-m btn-info"  type="button">保存内容</button>
+                                <button class="btn btn-white" type="reset">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/H+/js/jquery.min.js"></script>
+<script src="/static/H+/js/bootstrap.min.js"></script>
+<script src="/static/H+/js/content.min.js"></script>
+<script src="/static/H+/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/layer/layer.js"></script>
+<script>
+    //    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+    $(".btn-info").click(function() {
+        var two_id      =   $(".two_name").find("option:selected").val();
+        var address     =   $.trim($(".address").val());
+        var tel         =   $.trim($(".tel").val());
+        var wechat      =   $.trim($(".wechat").val());
+        var qq          =   $.trim($(".qq").val());
+        var url         =   $.trim($(".url").val());
+        var status      = $(':radio[name="status"]:checked').val();
+        if(address == ''){
+            layer.msg('校区地址不能为空！',function () {
+            });
+            $(".address").focus();
+            return false
+        }else if(address.length<2 || address.length>100){
+            layer.msg('校区地址长度应在2-100之间！',function () {
+            });
+            $(".address").focus();
+            return false;
+        }
+        if(tel == ''){
+            layer.msg('咨询电话不能为空！',function () {
+            });
+            $(".tel").focus();
+            return false;
+        }else if(tel.length<2 || tel.length>20){
+            layer.msg('咨询电话长度应在2-20之间！',function () {
+            });
+            $(".tel").focus();
+            return false;
+        }
+        if(wechat == ''){
+            layer.msg('咨询微信不能为空！',function () {
+            });
+            $(".wechat").focus();
+            return false;
+        }else if (wechat.length<2 || wechat.length>20){
+            layer.msg('咨询微信长度应在2-20之间！',function () {
+            });
+            $(".wechat").focus();
+            return false;
+        }
+        $.post(
+            "{:url('admin/About/contact_add')}",
+            {two_id: two_id, address: address, tel: tel, wechat: wechat, qq: qq, url: url, status:status},
+            function (data) {
+                console.log(data);
+                if (data.res == 1) {
+                    layer.alert('添加联系我们成功！', {
+                        icon: 6,
+                        btn: ['确认', '取消'],
+                        yes: function() {
+                            window.location.href="{:url('admin/About/contact')}";
+                        }
+                    });
+                }
+            }, "json");
+    });
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:15 GMT -->
+</html>
